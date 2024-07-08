@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net8.0;</TargetFrameworks>
+		<DocumentationFile>$(DocumentationFile)\$(AssemblyName).xml</DocumentationFile>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Ben.Demystifier" Version="[0.*, 1.0.0)" />
+		<PackageReference Include="Microsoft.Extensions.Http.Resilience" Version="[8.*, 9.0.0)" />
+		<PackageReference Include="MyCSharp.HttpUserAgentParser" Version="[3.*, 4.0.0]" />
+	</ItemGroup>
+
+</Project>

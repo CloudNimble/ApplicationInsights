@@ -1,0 +1,17 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="Directory.Build.props" />
+    <File Path="..\README.md" />
+  </Folder>
+  <Properties Name="Visual Studio">
+    <Property Name="OpenWith" Value="17" />
+  </Properties>
+  <Folder Name="/Core/">
+    <Project Path="CloudNimble.ApplicationInsights.Blazor.Offline\CloudNimble.ApplicationInsights.Blazor.Offline.csproj" Type="C#" />
+    <Project Path="CloudNimble.ApplicationInsights.Blazor.WebAssembly\CloudNimble.ApplicationInsights.Blazor.WebAssembly.csproj" />
+    <Project Path="CloudNimble.ApplicationInsights.Blazor\CloudNimble.ApplicationInsights.Blazor.csproj" />
+    <Project Path="CloudNimble.ApplicationInsights\CloudNimble.ApplicationInsights.csproj" />
+  </Folder>
+  <Project Path="CloudNimble.ApplicationInsights.Samples.AspNetMvc.Legacy\CloudNimble.ApplicationInsights.Samples.AspNetMvc.Legacy.csproj" Type="C#" />
+  <Project Path="CloudNimble.ApplicationInsights.Samples.Console.Legacy\CloudNimble.ApplicationInsights.Samples.Console.Legacy.csproj" Type="C#" />
+</Solution>

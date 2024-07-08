@@ -1,0 +1,108 @@
+<Project>
+
+	<PropertyGroup>
+		<IsBenchmarkProject Condition="$(MSBuildProjectName.EndsWith('.Performance'))">true</IsBenchmarkProject>
+		<IsTestProject Condition="$(MSBuildProjectName.ToLower().Contains('.tests'))">true</IsTestProject>
+		<IsTestAssetProject Condition="$(RepoRelativeProjectDir.Contains('testassets'))">true</IsTestAssetProject>
+		<IsSampleProject Condition="$(MSBuildProjectName.ToLower().EndsWith('blazoressentials.testapp'))">true</IsSampleProject>
+		<IsNetCore Condition=" '$(TargetFramework)' == 'netcoreapp3.1' OR '$(TargetFramework)' == 'net5.0' OR '$(TargetFramework)' == 'net6.0' ">true</IsNetCore>
+		<IsPrimaryProject Condition=" ('$(IsBenchmarkProject)' != 'true' And '$(IsTestProject)' != 'true' And '$(IsTestAssetProject)' != 'true' And '$(IsSampleProject)' != 'true' And '$(IsSampleProject)' != 'true') or '$(IsTemplatePackageProject)' == 'true' ">true</IsPrimaryProject>
+
+		<IncludeSource>false</IncludeSource>
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+
+		<SignAssembly>false</SignAssembly>
+		<!--<AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)blazoressentials.snk</AssemblyOriginatorKeyFile>
+		<StrongNamePublicKey>PublicKey=00240000048000009400000006020000002400005253413100040000010001007984ebb1397d366339416a4c003b9a0e25dbbe933b08e0090ae77fe4cf780a8258ad356c9f2bc9a2f7f958e975063cd32be0ed5dd7b588e3360153db0cba435d69e46868c6927ead7aa43f71724a53714f9597a3396cc496dfc8086e7c1010f9f24ba6c0b5deacdbd04ecd40d3669a4797baff60c5e03968a1e84c40e64c00d3</StrongNamePublicKey>-->
+
+		<LangVersion>12.0</LangVersion>
+
+		<!-- .NET 6 kinda sucks. There is no good reason for doing this. -->
+		<DisableImplicitNamespaceImports>true</DisableImplicitNamespaceImports>
+
+		<!-- Working around Blazor issue https://github.com/dotnet/aspnetcore/issues/30427  -->
+		<!-- <DisableScopedCssBundling>none</DisableScopedCssBundling>
+		<EnableDefaultScopedCssItems>false</EnableDefaultScopedCssItems>
+		<ScopedCssEnabled>false</ScopedCssEnabled> -->
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<Product>CloudNimble.ApplicationInsights</Product>
+		<Version>1.0.0</Version>
+		<PackageVersion>1.0.0</PackageVersion>
+		
+		<Authors>CloudNimble</Authors>
+		<Company>CloudNimble Inc.</Company>
+		<RpmPackageVendor>CloudNimble</RpmPackageVendor>
+		<Copyright>Copyright © 2024-2025 CloudNimble, Inc. All rights reserved.</Copyright>
+		<NeutralLanguage>en-US</NeutralLanguage>
+		<!-- The SPDX name for the source license. See https://spdx.org/licenses/. -->
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		
+		<!-- Suppress warnings about using SemVer 2.0. -->
+		<NoWarn>$(NoWarn);NU5048</NoWarn>
+
+		<NoWarn>$(NoWarn);CS8002;CS8632;NU5104</NoWarn>
+
+		<!-- Contact email address for NuGet packages and Linux installers. -->
+		<MaintainerEmail>opensource@nimbleapps.cloud</MaintainerEmail>
+
+		<PackageIconUrl>https://go.microsoft.com/fwlink/?LinkID=288859</PackageIconUrl>
+		<PackageProjectUrl>https://github.com/CloudNimble/ApplicationInsights</PackageProjectUrl>
+		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+		<PackageTags>blazor</PackageTags>
+		<Serviceable>true</Serviceable>
+
+		<RepositoryRoot>$(MSBuildThisFileDirectory)</RepositoryRoot>
+		<RepositoryUrl>https://github.com/CloudNimble/ApplicationInsights.git</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+	</PropertyGroup>
+
+	<!-- Compilation options -->
+	<PropertyGroup>
+		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+
+		<!-- Instructs the compiler to use SHA256 instead of SHA1 when adding file hashes to PDBs. -->
+		<ChecksumAlgorithm>SHA256</ChecksumAlgorithm>
+
+		<!-- Fixes a common error in targets implementing a NoBuild mode. -->
+		<BuildProjectReferences Condition=" '$(NoBuild)' == 'true' ">false</BuildProjectReferences>
+	</PropertyGroup>
+
+	<PropertyGroup Condition=" $(IsPrimaryProject) == 'true' ">
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<DocumentationFile>bin\$(Configuration)\$(TargetFramework)</DocumentationFile>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<StandardTestTfms>net7.0;net6.0</StandardTestTfms>
+	</PropertyGroup>
+
+	<PropertyGroup Condition=" $(IsSampleProject) == 'true' ">
+		<GenerateProgramFile>false</GenerateProgramFile>
+	</PropertyGroup>
+
+	<PropertyGroup Condition=" $(IsTestProject) == 'true' ">
+		<IsPackable>false</IsPackable>
+	</PropertyGroup>
+
+	<ItemGroup Condition=" $(IsTestProject) != 'true' and $(IsSampleProject) != 'true' ">
+		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.*" PrivateAssets="All" />
+		<!-- RWM: The code quality on the unit tests right now is not awesome, so let's skip checking it for now. -->
+
+		<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+			<_Parameter1>$(AssemblyName.Replace("CloudNimble.ApplicationInsights", "CloudNimble.ApplicationInsights.Tests"))</_Parameter1>
+		</AssemblyAttribute>
+
+	</ItemGroup>
+
+	<ItemGroup Condition=" $(IsTestProject) == 'true' ">
+		<PackageReference Include="FluentAssertions" Version="6.*" PrivateAssets="All" />
+		<PackageReference Include="FluentAssertions.Analyzers" Version="0.*" PrivateAssets="All" />
+		<PackageReference Include="MSTest" Version="3.*" />
+	</ItemGroup>
+
+</Project>

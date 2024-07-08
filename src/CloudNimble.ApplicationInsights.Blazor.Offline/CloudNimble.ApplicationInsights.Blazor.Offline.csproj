@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<DocumentationFile>$(DocumentationFile)\$(AssemblyName).xml</DocumentationFile>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="BlazorEssentials.IndexedDb" Version="3.*-*" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\CloudNimble.ApplicationInsights.Blazor\CloudNimble.ApplicationInsights.Blazor.csproj" />
+	</ItemGroup>
+
+</Project>
