@@ -26,7 +26,6 @@
 
 	<ItemGroup>
 		<PackageReference Include="KristofferStrube.Blazor.Window" Version="[0.*-*, 1.0.0)" />
-		<PackageReference Include="MyCSharp.HttpUserAgentParser" Version="[3.*, 4.0.0]" />
 		<PackageReference Include="Microsoft.TypeScript.MSBuild" Version="5.5.2">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -42,6 +41,7 @@
 	<ItemGroup>
 		<SupportedPlatform Include="browser" />
 		<None Include="..\.editorconfig" Link=".editorconfig" />
+		<None Include="README.md" Pack="true" PackagePath="\"/>
 	</ItemGroup>
 
 	<ItemGroup>

@@ -1,9 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CloudNimble.ApplicationInsights.Blazor.Offline;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace CloudNimble.ApplicationInsights.Blazor.Extensions
 {
@@ -21,7 +17,9 @@ namespace CloudNimble.ApplicationInsights.Blazor.Extensions
         /// <returns></returns>
         public static TelemetryClientBuilder AddOfflineSupport(this TelemetryClientBuilder builder)
         {
-            //builder.Services.AddSingleton<ApplicationInsightsOfflineSupport>();
+            // RWM: This is probably not right and we'll have to figure out how to
+            //      deal with network availability in a more robust way.
+            builder.Services.AddSingleton<IRequestPublisher, OfflineRequestPublisher>();
             return builder;
         }
 

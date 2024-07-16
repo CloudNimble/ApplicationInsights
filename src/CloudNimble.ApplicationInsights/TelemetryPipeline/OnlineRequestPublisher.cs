@@ -1,5 +1,6 @@
-﻿using CloudNimble.ApplicationInsights.Interfaces;
+﻿using CloudNimble.ApplicationInsights.Models;
 using System.Net.Http;
+using System.Net.Http.Json;
 using System.Threading.Tasks;
 
 namespace CloudNimble.ApplicationInsights.TelemetryPipeline
@@ -39,11 +40,10 @@ namespace CloudNimble.ApplicationInsights.TelemetryPipeline
         /// 
         /// </summary>
         /// <returns></returns>
-        public async Task PublishAsync()
+        public async Task PublishAsync<T>(RequestDetails<T> details) where T : InsightsBase
         {
             var client = _httpClientFactory.CreateClient("ApplicationInsights");
-            var request = new HttpRequestMessage(HttpMethod.Post, _telemetryOptions.IngestionEndpoint);
-            var response = await client.SendAsync(request);
+            var response = await client.PostAsJsonAsync(_telemetryOptions.IngestionEndpoint, details);
         }
 
         #endregion

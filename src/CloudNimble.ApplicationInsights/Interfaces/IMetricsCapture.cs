@@ -1,6 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using CloudNimble.ApplicationInsights.Models;
+using System.Threading.Tasks;
 
-namespace CloudNimble.ApplicationInsights.Interfaces
+namespace CloudNimble.ApplicationInsights
 {
 
     /// <summary>
@@ -13,7 +14,7 @@ namespace CloudNimble.ApplicationInsights.Interfaces
         /// 
         /// </summary>
         /// <returns></returns>
-        public async Task CaptureAsync()
+        public async Task CaptureAsync<T>(RequestDetails<T> details) where T : InsightsBase
         {
             await Task.CompletedTask;
         }

@@ -87,6 +87,7 @@
 
 	<PropertyGroup Condition=" $(IsTestProject) == 'true' ">
 		<IsPackable>false</IsPackable>
+		<TreatWarningsAsErrors>false</TreatWarningsAsErrors>
 	</PropertyGroup>
 
 	<ItemGroup Condition=" $(IsTestProject) != 'true' and $(IsSampleProject) != 'true' ">

@@ -6,10 +6,17 @@
 		<AddRazorSupportForMvc>true</AddRazorSupportForMvc>
 	</PropertyGroup>
 
-
+	<PropertyGroup>
+		<TypeScriptModuleKind>es6</TypeScriptModuleKind>
+		<TypeScriptTarget>es2015</TypeScriptTarget>
+		<TypeScriptOutDir>wwwroot</TypeScriptOutDir>
+		<TypeScriptModuleResolution>node</TypeScriptModuleResolution>
+		<TypeScriptESModuleInterop>false</TypeScriptESModuleInterop>
+	</PropertyGroup>
+	
 	<ItemGroup>
 		<PackageReference Include="KristofferStrube.Blazor.Window" Version="[0.*-*, 1.0.0)" />
-		<PackageReference Include="Microsoft.TypeScript.MSBuild" Version="5.5.2">
+		<PackageReference Include="Microsoft.TypeScript.MSBuild" Version="5.5.*">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
@@ -24,5 +31,10 @@
   <ItemGroup>
     <ProjectReference Include="..\CloudNimble.ApplicationInsights\CloudNimble.ApplicationInsights.csproj" />
   </ItemGroup>
+
+	<ItemGroup>
+		<None Include="README.md" />
+		<TypeScriptCompile Remove="node_modules\**" />
+	</ItemGroup>
 
 </Project>

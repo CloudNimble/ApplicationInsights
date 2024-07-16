@@ -7,11 +7,27 @@
     <Property Name="OpenWith" Value="17" />
   </Properties>
   <Folder Name="/Core/">
-    <Project Path="CloudNimble.ApplicationInsights.Blazor.Offline\CloudNimble.ApplicationInsights.Blazor.Offline.csproj" Type="C#" />
+    <Project Path="CloudNimble.ApplicationInsights.Blazor.Offline\CloudNimble.ApplicationInsights.Blazor.Offline.csproj" />
     <Project Path="CloudNimble.ApplicationInsights.Blazor.WebAssembly\CloudNimble.ApplicationInsights.Blazor.WebAssembly.csproj" />
     <Project Path="CloudNimble.ApplicationInsights.Blazor\CloudNimble.ApplicationInsights.Blazor.csproj" />
     <Project Path="CloudNimble.ApplicationInsights\CloudNimble.ApplicationInsights.csproj" />
+    <Project Path="D:\GitHub\ApplicationInsights\src\CloudNimble.ApplicationInsights.Blazor.Offline\CloudNimble.ApplicationInsights.Blazor.Offline.csproj" />
+    <Project Path="D:\GitHub\ApplicationInsights\src\CloudNimble.ApplicationInsights.Blazor.WebAssembly\CloudNimble.ApplicationInsights.Blazor.WebAssembly.csproj" />
+    <Project Path="D:\GitHub\ApplicationInsights\src\CloudNimble.ApplicationInsights.Blazor\CloudNimble.ApplicationInsights.Blazor.csproj" />
+    <Project Path="D:\GitHub\ApplicationInsights\src\CloudNimble.ApplicationInsights\CloudNimble.ApplicationInsights.csproj" />
+    <Project Path="D:\GitHub\ApplicationInsights\src\CloudNimble.ApplicationInsights.Console\CloudNimble.ApplicationInsights.Console.csproj" Type="C#" />
+    <Project Path="CloudNimble.ApplicationInsights.AspNetCore\CloudNimble.ApplicationInsights.AspNetCore.csproj" Type="C#" />
+    <Project Path="CloudNimble.ApplicationInsights.Console\CloudNimble.ApplicationInsights.Console.csproj" Type="C#" />
   </Folder>
-  <Project Path="CloudNimble.ApplicationInsights.Samples.AspNetMvc.Legacy\CloudNimble.ApplicationInsights.Samples.AspNetMvc.Legacy.csproj" Type="C#" />
-  <Project Path="CloudNimble.ApplicationInsights.Samples.Console.Legacy\CloudNimble.ApplicationInsights.Samples.Console.Legacy.csproj" Type="C#" />
+  <Project Path="CloudNimble.ApplicationInsights.Samples.AspNetMvc.Legacy\CloudNimble.ApplicationInsights.Samples.AspNetMvc.Legacy.csproj" />
+  <Project Path="CloudNimble.ApplicationInsights.Samples.Console.Legacy\CloudNimble.ApplicationInsights.Samples.Console.Legacy.csproj" />
+  <Folder Name="/Tests/">
+    <Project Path="D:\GitHub\ApplicationInsights\src\CloudNimble.ApplicationInsights.Tests\CloudNimble.ApplicationInsights.Tests.csproj" Type="C#" />
+    <Project Path="CloudNimble.ApplicationInsights.Tests\CloudNimble.ApplicationInsights.Tests.csproj" Type="C#" />
+    <Project Path="D:\GitHub\ApplicationInsights\src\CloudNimble.ApplicationInsights.Tests.Blazor\CloudNimble.ApplicationInsights.Tests.Blazor.csproj" Type="C#" />
+    <Project Path="CloudNimble.ApplicationInsights.Tests.Blazor\CloudNimble.ApplicationInsights.Tests.Blazor.csproj" Type="C#" />
+  </Folder>
+  <Project Path="D:\GitHub\ApplicationInsights\src\CloudNimble.ApplicationInsights.Samples.Blazor.WebAssembly\CloudNimble.ApplicationInsights.Samples.Blazor.WebAssembly.csproj" Type="C#" />
+  <Project Path="CloudNimble.ApplicationInsights.Samples.Blazor.WebAssembly\CloudNimble.ApplicationInsights.Samples.Blazor.WebAssembly.csproj" Type="C#" />
+  <Folder Name="/Samples/" />
 </Solution>

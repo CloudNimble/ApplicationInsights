@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using CloudNimble.ApplicationInsights.TelemetryPipeline;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace CloudNimble.ApplicationInsights
 {
@@ -27,6 +28,21 @@ namespace CloudNimble.ApplicationInsights
         public TelemetryClientBuilder(IServiceCollection services)
         {
             Services = services;
+        }
+
+        #endregion
+
+        #region Public Methods
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public TelemetryClientBuilder SendImmediately()
+        {
+            Services.AddSingleton<IRequestPublisher, OnlineRequestPublisher>();
+            Services.AddHttpClient("ApplicationInsights");
+            return this;
         }
 
         #endregion

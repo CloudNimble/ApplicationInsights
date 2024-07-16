@@ -1,27 +1,45 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using CloudNimble.ApplicationInsights.Blazor.MetricsCapture;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.AspNetCore.Components.Web;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace CloudNimble.ApplicationInsights.Blazor.Webassembly.Controls
+namespace CloudNimble.ApplicationInsights.Blazor.Controls
 {
 
     /// <summary>
     /// An extension of the Blazor <see cref="ErrorBoundary" /> control that automatically sends exceptions to 
     /// Azure Application Insights.
     /// </summary>
+    /// <remarks>
+    /// This control will automatically call <see cref="BrowserMetricsInterop.InitializeAsync" /> in the
+    /// <see cref="OnAfterRenderAsync(bool)" /> method.
+    /// </remarks>
     public class ApplicationInsightsErrorBoundary : ErrorBoundary
     {
 
         #region Public Parameters
 
         /// <summary>
-        /// The instance of the <see cref="TelemetryClient" /> to use to send exceptions to Azure Application Insights.
+        /// The <see cref="TelemetryClient" /> instance to use to send exceptions to Azure Application Insights.
         /// </summary>
         [Inject]
         public TelemetryClient TelemetryClient { get; set; }
+
+        /// <summary>
+        /// The <see cref="BlazorTelemetryOptions" /> instance that holds the developer's configuration for Azure Application
+        /// Insights.
+        /// </summary>
+        [Inject]
+        public BlazorTelemetryOptions TelemetryOptions { get; set; }
+
+        /// <summary>
+        /// The <see cref="BrowserMetricsInterop" /> instance that handles dealing with JSInterop.
+        /// </summary>
+        [Inject]
+        public TelemetryClientInterop BrowserMetricsInterop { get; set; }
 
         /// <summary>
         /// Specifies whether or not to display the built-in error UI when an exception occurs.
@@ -40,12 +58,30 @@ namespace CloudNimble.ApplicationInsights.Blazor.Webassembly.Controls
         /// <returns></returns>
         protected override async Task OnErrorAsync(Exception exception)
         {
-            await TelemetryClient.TrackExceptionAsync(exception, 
+            if (!TelemetryOptions.TrackUnhandledExceptions) return;
+
+            await TelemetryClient.TrackExceptionAsync(exception,
+                TelemetryOptions.DefaultUnhandledExceptionSeverityLevel,
                 new Dictionary<string, string>
                 {
-                    { "Runtime", "DotNet" },
-                    { "ExceptionType", "Unhandled" }
-                }, null);
+                    { "blazor.runtime", "DotNet" },
+                    { "blazor.exceptionType", "Unhandled" }
+                },
+                null);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="firstRender"></param>
+        /// <returns></returns>
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            if (firstRender)
+            {
+                await BrowserMetricsInterop.InitializeAsync();
+            }
+            await base.OnAfterRenderAsync(firstRender);
         }
 
         /// <inheritdoc />

@@ -1,6 +1,6 @@
 ﻿using CloudNimble.ApplicationInsights;
 using CloudNimble.ApplicationInsights.Blazor;
-using KristofferStrube.Blazor.Window;
+using CloudNimble.ApplicationInsights.Blazor.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
@@ -21,15 +21,21 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting
         /// The name of the section in appsettings.json to get the <see cref="TelemetryOptions" /> from. 
         /// Defaults to "Azure:ApplicationInsights".
         /// </param>
-        public static void AddApplicationInsightsApplicationInsights(this WebAssemblyHostBuilder builder, 
+        public static TelemetryClientBuilder AddApplicationInsightsBlazor(this WebAssemblyHostBuilder builder, 
             string configSectionName = "Azure:ApplicationInsights")
         {
-            builder.Services.AddSingleton<ApplicationInsightsBrowserInterop>();
-            builder.Services.AddSingleton<IWindowService, WindowService>();
+            builder.Services.Configure<BlazorTelemetryOptions>(builder.Configuration.GetSection(configSectionName));
 
-            builder.Services.Configure<TelemetryOptions>(builder.Configuration.GetSection(configSectionName));
-            builder.Services.AddSingleton(provider => provider.GetService<IOptions<TelemetryOptions>>().Value);
+            // RWM: Make sure both types of TelemetryOptions are available to the DI container by using the one that already exists.
+            builder.Services.AddSingleton(provider => provider.GetService<IOptions<BlazorTelemetryOptions>>().Value);
+            builder.Services.AddSingleton<TelemetryOptions>(provider => provider.GetService<IOptions<BlazorTelemetryOptions>>().Value);
+
             builder.Services.AddSingleton<TelemetryClient>();
+
+            //builder.Services.Remove(builder.Services.GetService<ITelemetryInitializer>());
+
+            return new TelemetryClientBuilder(builder.Services)
+                .AddBrowserTelemetry();
         }
 
     }

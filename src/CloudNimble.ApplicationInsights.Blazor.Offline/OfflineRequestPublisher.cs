@@ -1,6 +1,4 @@
-﻿using CloudNimble.ApplicationInsights.Interfaces;
-
-namespace CloudNimble.ApplicationInsights.Blazor.Offline
+﻿namespace CloudNimble.ApplicationInsights.Blazor.Offline
 {
 
     /// <summary>

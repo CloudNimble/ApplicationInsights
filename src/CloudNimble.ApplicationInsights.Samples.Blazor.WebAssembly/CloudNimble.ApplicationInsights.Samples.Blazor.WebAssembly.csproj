@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<DocumentationFile>$(DocumentationFile)\$(AssemblyName).xml</DocumentationFile>
+
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.*" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.*" PrivateAssets="all" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\CloudNimble.ApplicationInsights.Blazor.WebAssembly\CloudNimble.ApplicationInsights.Blazor.WebAssembly.csproj" />
+	  <ProjectReference Include="..\CloudNimble.ApplicationInsights.Blazor\CloudNimble.ApplicationInsights.Blazor.csproj" />
+	  <ProjectReference Include="..\CloudNimble.ApplicationInsights\CloudNimble.ApplicationInsights.csproj" />
+	</ItemGroup>
+
+</Project>
