@@ -7,17 +7,14 @@ namespace CloudNimble.ApplicationInsights
     /// <summary>
     /// 
     /// </summary>
-    public interface IMetricsCapture
+    public interface ITelemetryCapture
     {
 
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
-        public async Task CaptureAsync<T>(RequestDetails<T> details) where T : InsightsBase
-        {
-            await Task.CompletedTask;
-        }
+        public Task CaptureAsync<T>(RequestDetails<T> details) where T : InsightsBase;
 
     }
 

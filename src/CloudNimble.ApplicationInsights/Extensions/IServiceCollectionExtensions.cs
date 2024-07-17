@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using CloudNimble.ApplicationInsights.TelemetryPipeline;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 
 namespace CloudNimble.ApplicationInsights.Extensions
@@ -19,6 +20,9 @@ namespace CloudNimble.ApplicationInsights.Extensions
         public static TelemetryClientBuilder AddApplicationInsights(this IServiceCollection services, Action<TelemetryOptions> configureOptions)
         {
             services.Configure(configureOptions);
+
+            services.AddSingleton<ITelemetryCapture, DefaultTelemetryCapture>();
+
             return new TelemetryClientBuilder(services);
         }
 

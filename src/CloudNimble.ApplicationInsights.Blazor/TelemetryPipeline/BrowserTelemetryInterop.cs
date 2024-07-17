@@ -3,7 +3,7 @@ using Microsoft.JSInterop;
 using System;
 using System.Threading.Tasks;
 
-namespace CloudNimble.ApplicationInsights.Blazor.MetricsCapture
+namespace CloudNimble.ApplicationInsights.Blazor.TelemetryPipeline
 {
 
     /// <summary>
@@ -11,10 +11,10 @@ namespace CloudNimble.ApplicationInsights.Blazor.MetricsCapture
     /// </summary>
     /// <remarks>
     /// Originally, we wanted to keep all the interop in one class. However, that created a circular reference in the
-    /// <see cref="TelemetryClient" /> when we add the <see cref="BrowserMetricsCapture" /> pipeline to the DI container.
+    /// <see cref="TelemetryClient" /> when we add the <see cref="BrowserTelemetryCapture" /> pipeline to the DI container.
     /// So we had to separate out capturing metrics from providing a way to call <see cref="TelemetryClient" /> from JavaScript.
     /// </remarks>
-    public class BrowserMetricsInterop : IAsyncDisposable
+    public class BrowserTelemetryInterop : IAsyncDisposable
     {
 
         #region Private Members
@@ -45,10 +45,10 @@ namespace CloudNimble.ApplicationInsights.Blazor.MetricsCapture
         #region Constructors
 
         /// <summary>
-        /// Creates a new instance of the <see cref="BrowserMetricsInterop" /> class.
+        /// Creates a new instance of the <see cref="BrowserTelemetryInterop" /> class.
         /// </summary>
         /// <param name="jsRuntime">The <see cref="IJSRuntime" /> instance to use for JS Interop.</param>
-        public BrowserMetricsInterop(IJSRuntime jsRuntime)
+        public BrowserTelemetryInterop(IJSRuntime jsRuntime)
         {
             _jsRuntime = jsRuntime;
         }

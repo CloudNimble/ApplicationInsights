@@ -17,7 +17,7 @@ namespace CloudNimble.ApplicationInsights
 
         #region Private Members
 
-        private readonly List<IMetricsCapture> _metricsCaptureList;
+        private readonly List<ITelemetryCapture> _metricsCaptureList;
         private readonly Dictionary<string, Stopwatch> _pageStopwatches = [];
         private readonly IRequestPublisher _requestPublisher;
         private readonly TelemetryOptions _telemetryOptions;
@@ -38,7 +38,7 @@ namespace CloudNimble.ApplicationInsights
         /// <param name="telemetryOptions"></param>
         /// <param name="metricsCaptureList"></param>
         /// <param name="requestPublisher"></param>
-        public TelemetryClient(TelemetryOptions telemetryOptions, IEnumerable<IMetricsCapture> metricsCaptureList, IRequestPublisher requestPublisher)
+        public TelemetryClient(TelemetryOptions telemetryOptions, IEnumerable<ITelemetryCapture> metricsCaptureList, IRequestPublisher requestPublisher)
         {
             _telemetryOptions = telemetryOptions;
             _metricsCaptureList = metricsCaptureList.ToList();

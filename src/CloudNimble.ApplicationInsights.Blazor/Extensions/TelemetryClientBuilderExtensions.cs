@@ -1,4 +1,4 @@
-﻿using CloudNimble.ApplicationInsights.Blazor.MetricsCapture;
+﻿using CloudNimble.ApplicationInsights.Blazor.TelemetryPipeline;
 using KristofferStrube.Blazor.Window;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -19,9 +19,9 @@ namespace CloudNimble.ApplicationInsights.Blazor.Extensions
         public static TelemetryClientBuilder AddBrowserTelemetry(this TelemetryClientBuilder builder)
         {
             builder.Services.AddSingleton<IWindowService, WindowService>();
-            builder.Services.AddSingleton<BrowserMetricsInterop>();
+            builder.Services.AddSingleton<BrowserTelemetryInterop>();
             builder.Services.AddSingleton<TelemetryClientInterop>();
-            builder.Services.AddSingleton<IMetricsCapture, BrowserMetricsCapture>();
+            builder.Services.AddSingleton<ITelemetryCapture, BrowserTelemetryCapture>();
             return builder;
         }
 

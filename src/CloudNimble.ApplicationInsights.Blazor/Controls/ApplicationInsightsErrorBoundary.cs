@@ -1,4 +1,4 @@
-﻿using CloudNimble.ApplicationInsights.Blazor.MetricsCapture;
+﻿using CloudNimble.ApplicationInsights.Blazor.TelemetryPipeline;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.AspNetCore.Components.Web;
@@ -14,7 +14,7 @@ namespace CloudNimble.ApplicationInsights.Blazor.Controls
     /// Azure Application Insights.
     /// </summary>
     /// <remarks>
-    /// This control will automatically call <see cref="BrowserMetricsInterop.InitializeAsync" /> in the
+    /// This control will automatically call <see cref="BrowserTelemetryInterop.InitializeAsync" /> in the
     /// <see cref="OnAfterRenderAsync(bool)" /> method.
     /// </remarks>
     public class ApplicationInsightsErrorBoundary : ErrorBoundary
@@ -36,10 +36,10 @@ namespace CloudNimble.ApplicationInsights.Blazor.Controls
         public BlazorTelemetryOptions TelemetryOptions { get; set; }
 
         /// <summary>
-        /// The <see cref="BrowserMetricsInterop" /> instance that handles dealing with JSInterop.
+        /// The <see cref="TelemetryClientInterop" /> instance that handles dealing with JSInterop.
         /// </summary>
         [Inject]
-        public TelemetryClientInterop BrowserMetricsInterop { get; set; }
+        public TelemetryClientInterop TelemetryClientInterop { get; set; }
 
         /// <summary>
         /// Specifies whether or not to display the built-in error UI when an exception occurs.
@@ -79,7 +79,7 @@ namespace CloudNimble.ApplicationInsights.Blazor.Controls
         {
             if (firstRender)
             {
-                await BrowserMetricsInterop.InitializeAsync();
+                await TelemetryClientInterop.InitializeAsync();
             }
             await base.OnAfterRenderAsync(firstRender);
         }

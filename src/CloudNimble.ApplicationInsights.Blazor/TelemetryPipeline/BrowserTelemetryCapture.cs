@@ -1,32 +1,36 @@
 ﻿using CloudNimble.ApplicationInsights.Models;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CloudNimble.ApplicationInsights.Blazor.MetricsCapture
+namespace CloudNimble.ApplicationInsights.Blazor.TelemetryPipeline
 {
 
     /// <summary>
-    /// Captures browser-specific metrics from the <see cref="BrowserMetricsInterop" /> instance injected into the
+    /// Captures browser-specific metrics from the <see cref="BrowserTelemetryInterop" /> instance injected into the
     /// app.
     /// </summary>
-    internal class BrowserMetricsCapture : IMetricsCapture
+    /// <remarks>
+    /// https://github.com/microsoft/ApplicationInsights-JS/blob/main/shared/AppInsightsCommon/src/Interfaces/Contracts/ContextTagKeys.ts
+    /// </remarks>
+    internal class BrowserTelemetryCapture : ITelemetryCapture
     {
 
         #region Private Members
 
-        private readonly BrowserMetricsInterop _interop;
+        private readonly BrowserTelemetryInterop _interop;
 
         #endregion
 
         #region Constructors
 
         /// <summary>
-        /// Creates a new instance of the <see cref="BrowserMetricsCapture" /> class.
+        /// Creates a new instance of the <see cref="BrowserTelemetryCapture" /> class.
         /// </summary>
         /// <param name="interop">
-        /// The <see cref="BrowserMetricsInterop" /> instance from DI to capture browser metrics with.
+        /// The <see cref="BrowserTelemetryInterop" /> instance from DI to capture browser metrics with.
         /// </param>
-        public BrowserMetricsCapture(BrowserMetricsInterop interop)
+        public BrowserTelemetryCapture(BrowserTelemetryInterop interop)
         {
             _interop = interop;
         }
@@ -59,9 +63,16 @@ namespace CloudNimble.ApplicationInsights.Blazor.MetricsCapture
 
             properties.Add("blazor.browser.cookies.enabled", _interop.BrowserSpecs.AreCookiesEnabled.ToString());
 
-            properties.Add("blazor.browser.device.formFactor", _interop.BrowserSpecs.UserAgentData.FormFactor);
+            if (!string.IsNullOrWhiteSpace(_interop.BrowserSpecs.UserAgentData.FormFactor))
+            {
+                properties.Add("blazor.browser.device.formFactor", _interop.BrowserSpecs.UserAgentData.FormFactor);
+            }
             properties.Add("blazor.browser.device.ram", _interop.BrowserSpecs.DeviceMemoryInGB.ToString());
-            properties.Add("blazor.browser.device.model", _interop.BrowserSpecs.UserAgentData.Model);
+
+            if (!string.IsNullOrWhiteSpace(_interop.BrowserSpecs.UserAgentData.Model))
+            {
+                properties.Add("blazor.browser.device.model", _interop.BrowserSpecs.UserAgentData.Model);
+            }
             properties.Add("blazor.browser.device.processors", _interop.BrowserSpecs.ProcessorCount.ToString());
             properties.Add("blazor.browser.device.isMobile", _interop.BrowserSpecs.UserAgentData.IsMobile.ToString());
 
@@ -80,6 +91,22 @@ namespace CloudNimble.ApplicationInsights.Blazor.MetricsCapture
             properties.Add("blazor.browser.storage.max", _interop.LatestBrowserStats.StorageQuotaInBytes.ToString());
             properties.Add("blazor.browser.storage.used", _interop.LatestBrowserStats.StorageUsageInBytes.ToString());
             properties.Add("blazor.browser.storage.remaining", _interop.LatestBrowserStats.CalculatedStorageRemainingInBytes.ToString());
+
+            //RWM: Built-in tags support.
+            var browserVersion = _interop.BrowserSpecs.UserAgentData.ComponentVersions
+                .Where(c => !c.Key.StartsWith("not", System.StringComparison.InvariantCultureIgnoreCase) && c.Key != "Chromium")
+                .FirstOrDefault();
+
+            details.Tags.TryAdd("ai.device.browserVersion", $"{browserVersion.Key} {browserVersion.Value}");
+
+            details.Tags.TryAdd("ai.device.locale", _interop.BrowserSpecs.Locale);
+            if (!string.IsNullOrWhiteSpace(_interop.BrowserSpecs.UserAgentData.Model))
+            {
+                details.Tags.TryAdd("ai.device.model", _interop.BrowserSpecs.UserAgentData.Model);
+            }
+            details.Tags.TryAdd("ai.device.osVersion", _interop.BrowserSpecs.UserAgentData.CalculatedOSVersion);
+            details.Tags.TryAdd("ai.device.type", Enum.GetName(DeviceType.Browser));
+
         }
 
     }

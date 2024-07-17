@@ -1,6 +1,8 @@
 ﻿using CloudNimble.ApplicationInsights;
 using CloudNimble.ApplicationInsights.Blazor;
 using CloudNimble.ApplicationInsights.Blazor.Extensions;
+using CloudNimble.ApplicationInsights.Blazor.WebAssembly.TelemetryPipeline;
+using CloudNimble.ApplicationInsights.TelemetryPipeline;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
@@ -32,7 +34,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting
 
             builder.Services.AddSingleton<TelemetryClient>();
 
-            //builder.Services.Remove(builder.Services.GetService<ITelemetryInitializer>());
+            builder.Services.AddSingleton<ITelemetryCapture, DefaultTelemetryCapture>();
+            builder.Services.AddSingleton<ITelemetryCapture, WebAssemblyTelemetryCapture>();
 
             return new TelemetryClientBuilder(builder.Services)
                 .AddBrowserTelemetry();

@@ -53,11 +53,11 @@ namespace CloudNimble.ApplicationInsights.Models
             SeverityLevel = severityLevel;
             ProblemId = exception.Message;
             var currentException = exception.Demystify();
-            //while (currentException != null)
-            //{
-            //    Exceptions.Add(new ExceptionDetails(currentException));
-            //    currentException = currentException.InnerException;
-            //}
+            while (currentException != null)
+            {
+                Exceptions.Add(new ExceptionDetails(currentException));
+                currentException = currentException.InnerException;
+            }
         }
 
         #endregion

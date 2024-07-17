@@ -1,4 +1,4 @@
-﻿using CloudNimble.ApplicationInsights.Blazor.MetricsCapture;
+﻿using CloudNimble.ApplicationInsights.Blazor.TelemetryPipeline;
 using CloudNimble.ApplicationInsights.Models;
 using KristofferStrube.Blazor.DOM;
 using KristofferStrube.Blazor.WebIDL.Exceptions;
@@ -24,7 +24,7 @@ namespace CloudNimble.ApplicationInsights.Blazor
         private readonly DotNetObjectReference<TelemetryClientInterop> _dotNetReference;
         private EventListener<ErrorEvent>? _errorEventListener;
         private readonly IJSRuntime _jsRuntime;
-        private readonly BrowserMetricsInterop _metricsInterop;
+        private readonly BrowserTelemetryInterop _metricsInterop;
         private readonly NavigationManager _navigationManager;
         private readonly TelemetryClient _telemetryClient = null;
         private readonly BlazorTelemetryOptions _telemetryOptions;
@@ -54,7 +54,7 @@ namespace CloudNimble.ApplicationInsights.Blazor
         /// <param name="navigationManager"></param>
         /// <param name="windowService">The <see cref="WindowService" /> used to get a reference to the Browser Window object.</param>
         [DynamicDependency(nameof(TrackExceptionAsync))]
-        public TelemetryClientInterop(BrowserMetricsInterop metricsInterop, TelemetryClient telemetryClient, BlazorTelemetryOptions telemetryOptions, IJSRuntime jsRuntime, NavigationManager navigationManager,
+        public TelemetryClientInterop(BrowserTelemetryInterop metricsInterop, TelemetryClient telemetryClient, BlazorTelemetryOptions telemetryOptions, IJSRuntime jsRuntime, NavigationManager navigationManager,
             IWindowService windowService)
         {
             _dotNetReference = DotNetObjectReference.Create(this);

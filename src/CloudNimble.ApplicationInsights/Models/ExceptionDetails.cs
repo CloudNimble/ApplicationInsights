@@ -1,4 +1,6 @@
-﻿namespace CloudNimble.ApplicationInsights.Models
+﻿using System;
+
+namespace CloudNimble.ApplicationInsights.Models
 {
 
     /// <summary>
@@ -26,6 +28,18 @@
         /// 
         /// </summary>
         public string TypeName { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="exception"></param>
+        public ExceptionDetails(Exception exception)
+        {
+            Message = exception.Message;
+            Stack = exception.StackTrace;
+            TypeName = exception.GetType().FullName;
+            HasFullStack = true;
+        }
 
     }
 
