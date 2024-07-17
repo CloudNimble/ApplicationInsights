@@ -7,21 +7,13 @@
 	</PropertyGroup>
 
 	<PropertyGroup>
-		<PackageId>CloudNimmble.ApplicationInsights.Blazor.WebAssembly</PackageId>
-		<Description>Native Blazor integration for ApplicationInsights... JavaScript optional.</Description>
-		<RepositoryUrl>https://github.com/CloudNimble/ApplicationInsights</RepositoryUrl>
+		<Description>Native Blazor WebAssembly integration for ApplicationInsights... JavaScript optional.</Description>
 		<PackageReleaseNotes>
-			Version 2.0.0
-			- Updated support for Blazor on .NET 6 and .NET 7 Preview 6.
-			- Removed custom authentication solution in favor of OOB auth.
-			- Now injecting an IHttpClientFactory where necessary instead of an HttpClient.
-			- Added simplified registration into applications, thanks to EasyAF.Configuration and EasyAF.Http.
-			- Added Blazor unit testing support with Breakdance.
+			Version 1.0.0
+			- Initial Blazor WebAssembly Support
 		</PackageReleaseNotes>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<PackageTags>blazor;razorcomponents;Razor Components;WebAssembly;WASM;ApplicationInsights</PackageTags>
-		<Authors>CloudNimble</Authors>
-		<RepositoryType>git</RepositoryType>
+		<PackageTags>$(PackageTags);blazor;razorcomponents;WebAssembly;WASM</PackageTags>
 	</PropertyGroup>
 
 	<ItemGroup>

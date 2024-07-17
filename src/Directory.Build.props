@@ -5,7 +5,6 @@
 		<IsTestProject Condition="$(MSBuildProjectName.ToLower().Contains('.tests'))">true</IsTestProject>
 		<IsTestAssetProject Condition="$(RepoRelativeProjectDir.Contains('testassets'))">true</IsTestAssetProject>
 		<IsSampleProject Condition="$(MSBuildProjectName.ToLower().EndsWith('blazoressentials.testapp'))">true</IsSampleProject>
-		<IsNetCore Condition=" '$(TargetFramework)' == 'netcoreapp3.1' OR '$(TargetFramework)' == 'net5.0' OR '$(TargetFramework)' == 'net6.0' ">true</IsNetCore>
 		<IsPrimaryProject Condition=" ('$(IsBenchmarkProject)' != 'true' And '$(IsTestProject)' != 'true' And '$(IsTestAssetProject)' != 'true' And '$(IsSampleProject)' != 'true' And '$(IsSampleProject)' != 'true') or '$(IsTemplatePackageProject)' == 'true' ">true</IsPrimaryProject>
 
 		<IncludeSource>false</IncludeSource>
@@ -52,7 +51,7 @@
 		<PackageIconUrl>https://go.microsoft.com/fwlink/?LinkID=288859</PackageIconUrl>
 		<PackageProjectUrl>https://github.com/CloudNimble/ApplicationInsights</PackageProjectUrl>
 		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-		<PackageTags>blazor</PackageTags>
+		<PackageTags>ApplicationInsights</PackageTags>
 		<Serviceable>true</Serviceable>
 
 		<RepositoryRoot>$(MSBuildThisFileDirectory)</RepositoryRoot>

@@ -49,7 +49,6 @@ namespace CloudNimble.ApplicationInsights
 
         #region Public Methods
 
-
         /// <summary>
         /// 
         /// </summary>
@@ -100,7 +99,6 @@ namespace CloudNimble.ApplicationInsights
             await SendAsync(new RequestDetails<ExceptionData>(_telemetryOptions.InstrumentationKey,
                 new ExceptionData(exception, severityLevel)));
         }
-
 
         #endregion
 

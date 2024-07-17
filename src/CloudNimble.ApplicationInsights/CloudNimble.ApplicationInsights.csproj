@@ -5,6 +5,15 @@
 		<DocumentationFile>$(DocumentationFile)\$(AssemblyName).xml</DocumentationFile>
 	</PropertyGroup>
 
+	<PropertyGroup>
+		<Description>A modern ApplicationInsights SDK for modern apps.</Description>
+		<PackageReleaseNotes>
+			Version 1.0.0
+			- Initial ApplicationInsights API support
+		</PackageReleaseNotes>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+	</PropertyGroup>
+
 	<ItemGroup>
 		<PackageReference Include="Ben.Demystifier" Version="[0.*, 1.0.0)" />
 		<PackageReference Include="Microsoft.Extensions.Http.Resilience" Version="[8.*, 9.0.0)" />
