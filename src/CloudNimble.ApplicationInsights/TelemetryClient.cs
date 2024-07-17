@@ -25,7 +25,7 @@ namespace CloudNimble.ApplicationInsights
         internal static JsonSerializerOptions JsonSerializerOptions = new()
         {
             WriteIndented = true,
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
         };
 
         #endregion

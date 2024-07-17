@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Text.Json.Serialization;
 
 namespace CloudNimble.ApplicationInsights.Models
 {
@@ -17,13 +18,13 @@ namespace CloudNimble.ApplicationInsights.Models
         /// <summary>
         /// Exception chain - list of inner exceptions.
         /// </summary>
-        public List<ExceptionDetails> Exceptions { get; private set; }
+        public List<ExceptionDetails> Exceptions { get; set; }
 
         /// <summary>
         /// Identifier of where the exception was thrown in code. Used for exceptions grouping. 
         /// Typically a combination of exception type and a function from the call stack.
         /// </summary>
-        public string ProblemId { get; internal set; }
+        public string ProblemId { get; set; }
 
         /// <summary>
         /// Severity level. Mostly used to indicate exception severity level when it is reported by logging library.
@@ -37,7 +38,8 @@ namespace CloudNimble.ApplicationInsights.Models
         /// <summary>
         /// 
         /// </summary>
-        public ExceptionData()
+        [JsonConstructor]
+        private ExceptionData()
         {
             Exceptions = [];
             Measurements = new ConcurrentDictionary<string, double>();

@@ -8,7 +8,7 @@ namespace CloudNimble.ApplicationInsights.Models
     /// </summary>
     /// <typeparam name="T"></typeparam>
     //[JsonPolymorphic(TypeDiscriminatorPropertyName = "baseType")]
-    public class InsightsDataWrapper<T> where T : InsightsBase
+    public record InsightsDataWrapper<T> where T : InsightsBase
     {
 
         #region Properties

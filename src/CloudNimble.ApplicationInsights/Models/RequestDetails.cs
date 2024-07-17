@@ -8,7 +8,7 @@ namespace CloudNimble.ApplicationInsights.Models
     /// <summary>
     /// 
     /// </summary>
-    public class RequestDetails<T> where T : InsightsBase
+    public record RequestDetails<T> where T : InsightsBase
     {
 
         #region Properties

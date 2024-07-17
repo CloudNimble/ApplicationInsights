@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.Json.Serialization;
 
 namespace CloudNimble.ApplicationInsights.Models
 {
@@ -6,7 +7,7 @@ namespace CloudNimble.ApplicationInsights.Models
     /// <summary>
     /// 
     /// </summary>
-    public class ExceptionDetails
+    public record ExceptionDetails
     {
 
         /// <summary>
@@ -28,6 +29,15 @@ namespace CloudNimble.ApplicationInsights.Models
         /// 
         /// </summary>
         public string TypeName { get; set; }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [JsonConstructor]
+        private ExceptionDetails()
+        {
+        }
 
         /// <summary>
         /// 
