@@ -82,7 +82,7 @@ namespace CloudNimble.ApplicationInsights.Blazor
         /// </summary>
         public async Task InitializeAsync()
         {
-            if (_metricsInterop.ApplicationInsightsScript is not null) return;
+            if (_metricsInterop.BrowserSpecs is not null) return;
 
             //RWM: Do this first because we can't initialize something that isn't loaded yet.
             await _metricsInterop.InitializeAsync();
@@ -146,6 +146,8 @@ namespace CloudNimble.ApplicationInsights.Blazor
         {
             var exception = await errorEvent.GetErrorAsExceptionAsync();
             if (exception is null) return;
+
+
 
             await _telemetryClient.TrackExceptionAsync(exception,
                 _telemetryOptions.DefaultUnhandledExceptionSeverityLevel,

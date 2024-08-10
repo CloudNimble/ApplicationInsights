@@ -45,13 +45,13 @@ namespace CloudNimble.ApplicationInsights.Blazor.TelemetryPipeline
             properties.Add("blazor.browser.app.height", _interop.LatestBrowserStats.AppHeight.ToString());
 
             foreach (var version in _interop.BrowserSpecs.UserAgentData.BrandVersions
-                .Where(c => !c.Key.StartsWith("not", System.StringComparison.InvariantCultureIgnoreCase)))
+                .Where(c => !c.Key.StartsWith("not", StringComparison.InvariantCultureIgnoreCase)))
             {
                 properties.Add($"blazor.browser.version.brand.{version.Key}", version.Value);
             }
 
             foreach (var version in _interop.BrowserSpecs.UserAgentData.ComponentVersions
-                .Where(c => !c.Key.StartsWith("not", System.StringComparison.InvariantCultureIgnoreCase)))
+                .Where(c => !c.Key.StartsWith("not", StringComparison.InvariantCultureIgnoreCase)))
             {
                 properties.Add($"blazor.browser.version.component.{version.Key}", version.Value);
             }
@@ -94,7 +94,7 @@ namespace CloudNimble.ApplicationInsights.Blazor.TelemetryPipeline
 
             //RWM: Built-in tags support.
             var browserVersion = _interop.BrowserSpecs.UserAgentData.ComponentVersions
-                .Where(c => !c.Key.StartsWith("not", System.StringComparison.InvariantCultureIgnoreCase) && c.Key != "Chromium")
+                .Where(c => !c.Key.StartsWith("not", StringComparison.InvariantCultureIgnoreCase) && c.Key != "Chromium")
                 .FirstOrDefault();
 
             details.Tags.TryAdd("ai.device.browserVersion", $"{browserVersion.Key} {browserVersion.Value}");

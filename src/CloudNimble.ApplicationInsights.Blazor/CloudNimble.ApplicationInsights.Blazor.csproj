@@ -25,6 +25,7 @@
 	</PropertyGroup>
 	
 	<ItemGroup>
+		<PackageReference Include="BlazorEssentials" Version="3.*-*" />
 		<PackageReference Include="KristofferStrube.Blazor.Window" Version="[0.*-*, 1.0.0)" />
 		<PackageReference Include="Microsoft.TypeScript.MSBuild" Version="5.5.*">
 			<PrivateAssets>all</PrivateAssets>
@@ -36,6 +37,7 @@
 		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="[8.*, 9.0.0)" />
 		<PackageReference Include="Microsoft.Extensions.Http" Version="[8.*, 9.0.0)" />
 		<PackageReference Include="Microsoft.JSInterop" Version="[8.*, 9.0.0)" />
+		<PackageReference Include="System.Text.Json" Version="[8.*, 9.0.0)" />
 	</ItemGroup>
 
   <ItemGroup>

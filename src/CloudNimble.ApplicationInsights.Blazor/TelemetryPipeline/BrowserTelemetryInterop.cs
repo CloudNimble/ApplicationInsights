@@ -28,7 +28,7 @@ namespace CloudNimble.ApplicationInsights.Blazor.TelemetryPipeline
         /// <summary>
         /// A dynamic reference to the Application Insights Blazor Script.
         /// </summary>
-        internal IJSObjectReference ApplicationInsightsScript { get; private set; }
+        internal TelemetryJsModule ApplicationInsightsScript { get; private set; }
 
         /// <summary>
         /// Details about the Browser that are highly unlikely to change at runtime.
@@ -51,6 +51,7 @@ namespace CloudNimble.ApplicationInsights.Blazor.TelemetryPipeline
         public BrowserTelemetryInterop(IJSRuntime jsRuntime)
         {
             _jsRuntime = jsRuntime;
+            ApplicationInsightsScript = new(_jsRuntime);
         }
 
         #endregion
@@ -65,13 +66,10 @@ namespace CloudNimble.ApplicationInsights.Blazor.TelemetryPipeline
             // RWM: We're going to register the ApplicationInsights script and get the BrowserSpecs first. The reason why is
             //      because if we handle JS errors & they start coming in before we're ready, then there will be wailing and
             //      gnashing of teeth.
-            if (ApplicationInsightsScript is not null) return;
-
-            var assemblyName = GetType().Assembly.GetName().Name;
-            ApplicationInsightsScript = await _jsRuntime.InvokeAsync<IJSObjectReference>("import", $"./_content/{assemblyName}/{assemblyName}.js");
+            if (BrowserSpecs is not null) return;
 
             // RWM: Get and cache the BrowserSpecs so we can use them later.
-            BrowserSpecs = await ApplicationInsightsScript.InvokeAsync<BrowserSpecs>("getBrowserSpecs");
+            BrowserSpecs = await ApplicationInsightsScript.GetBrowserSpecs();
         }
 
         /// <summary>
@@ -96,7 +94,7 @@ namespace CloudNimble.ApplicationInsights.Blazor.TelemetryPipeline
         /// <returns></returns>
         internal async Task UpdateBrowserStats()
         {
-            LatestBrowserStats ??= await ApplicationInsightsScript.InvokeAsync<BrowserStats>("getBrowserStats");
+            LatestBrowserStats ??= await ApplicationInsightsScript.GetBrowserStats();
         }
 
         #endregion
