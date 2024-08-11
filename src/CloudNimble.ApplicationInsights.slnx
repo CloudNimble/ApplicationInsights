@@ -2,6 +2,7 @@
   <Folder Name="/Solution Items/">
     <File Path="Directory.Build.props" />
     <File Path="..\README.md" />
+    <File Path="global.json" />
   </Folder>
   <Properties Name="Visual Studio">
     <Property Name="OpenWith" Value="17" />
