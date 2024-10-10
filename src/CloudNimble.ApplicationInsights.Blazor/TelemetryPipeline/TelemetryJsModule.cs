@@ -12,7 +12,10 @@ namespace CloudNimble.ApplicationInsights.Blazor.TelemetryPipeline
     internal class TelemetryJsModule : JsModule
     {
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="jsRuntime"></param>
         internal TelemetryJsModule(IJSRuntime jsRuntime) : base(jsRuntime)
         {
         }

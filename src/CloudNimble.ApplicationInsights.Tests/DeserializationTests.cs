@@ -1,6 +1,8 @@
 ﻿using CloudNimble.ApplicationInsights.Models;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
 using System.Text.Json;
 
 namespace CloudNimble.ApplicationInsights.Tests
