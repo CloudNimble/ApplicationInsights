@@ -396,3 +396,4 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+/src/CloudNimble.ApplicationInsights.Blazor/wwwroot/CloudNimble.ApplicationInsights.Blazor.js.map

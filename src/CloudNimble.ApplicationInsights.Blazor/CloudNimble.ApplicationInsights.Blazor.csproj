@@ -22,6 +22,10 @@
 		<TypeScriptOutDir>wwwroot</TypeScriptOutDir>
 		<TypeScriptModuleResolution>node</TypeScriptModuleResolution>
 		<TypeScriptESModuleInterop>false</TypeScriptESModuleInterop>
+		<PrepareForBuildDependsOn>
+			CompileTypeScriptWithTSConfig;
+			GetTypeScriptOutputForPublishing;$(PrepareForBuildDependsOn)
+		</PrepareForBuildDependsOn>
 	</PropertyGroup>
 	
 	<ItemGroup>
@@ -53,6 +57,19 @@
 
 	<ItemGroup>
 		<TypeScriptCompile Remove="node_modules\**" />
+		<Content Remove="wwwroot\js\**" />
 	</ItemGroup>
+
+	<Target Name="RemoveDuplicateTypeScriptOutputs" BeforeTargets="GetTypeScriptOutputForPublishing">
+		<ItemGroup>
+			<Content Remove="@(GeneratedJavaScript)" />
+		</ItemGroup>
+	</Target>
+
+	<Target Name="RemoveConflictingAssets" BeforeTargets="ResolveStaticWebAssetsConfiguration">
+		<ItemGroup>
+			<StaticWebAsset Remove="@(StaticWebAsset)" Condition="'%(Extension)' == '.gz'" />
+		</ItemGroup>
+	</Target>
 
 </Project>
