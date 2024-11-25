@@ -23,6 +23,7 @@
 		<TypeScriptModuleResolution>node</TypeScriptModuleResolution>
 		<TypeScriptESModuleInterop>false</TypeScriptESModuleInterop>
 		<PrepareForBuildDependsOn>
+			CompileTypeScript;
 			CompileTypeScriptWithTSConfig;
 			GetTypeScriptOutputForPublishing;$(PrepareForBuildDependsOn)
 		</PrepareForBuildDependsOn>
