@@ -22,11 +22,11 @@
 		<TypeScriptOutDir>wwwroot</TypeScriptOutDir>
 		<TypeScriptModuleResolution>node</TypeScriptModuleResolution>
 		<TypeScriptESModuleInterop>false</TypeScriptESModuleInterop>
-		<PrepareForBuildDependsOn>
+		<!--<PrepareForBuildDependsOn>
 			CompileTypeScript;
 			CompileTypeScriptWithTSConfig;
 			GetTypeScriptOutputForPublishing;$(PrepareForBuildDependsOn)
-		</PrepareForBuildDependsOn>
+		</PrepareForBuildDependsOn>-->
 	</PropertyGroup>
 	
 	<ItemGroup>
@@ -58,14 +58,14 @@
 
 	<ItemGroup>
 		<TypeScriptCompile Remove="node_modules\**" />
-		<Content Remove="wwwroot\js\**" />
+		<!--<Content Remove="wwwroot\js\**" />-->
 	</ItemGroup>
 
-	<Target Name="RemoveDuplicateTypeScriptOutputs" BeforeTargets="GetTypeScriptOutputForPublishing">
+	<!--<Target Name="RemoveDuplicateTypeScriptOutputs" BeforeTargets="GetTypeScriptOutputForPublishing">
 		<ItemGroup>
 			<Content Remove="@(GeneratedJavaScript)" />
 		</ItemGroup>
-	</Target>
+	</Target>-->
 
 	<Target Name="RemoveConflictingAssets" BeforeTargets="ResolveStaticWebAssetsConfiguration">
 		<ItemGroup>
